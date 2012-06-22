@@ -8,3 +8,5 @@ function addmult(var1,var2)
 	var tot = mymult(var1,var2);
 	return tot + var1 + var2;
 }
+
+//added a comment 100
