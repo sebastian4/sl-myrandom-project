@@ -1,3 +1,5 @@
+//added a comment 10
+
 function myadd(var1,var2)
 {
 	return var1+var2;
