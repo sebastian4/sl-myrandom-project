@@ -7,6 +7,7 @@ function myadd(var1,var2)
 }
 
 //added a comment 50
+//added a comment 55
 
 function addmult(var1,var2)
 {
