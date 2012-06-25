@@ -7,6 +7,7 @@ var sl_myrandom = function() {
 	}
 	
 	return {
+		mvar1 : "aaa",
 		madd : function(var1,var2)
 		{
 			private_log();
