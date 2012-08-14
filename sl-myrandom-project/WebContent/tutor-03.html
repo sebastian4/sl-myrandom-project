@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<title>Tutor</title>
+
+</head>
+
+<body>
+
+<h3>Tutor</h3> <h5> v 3 </h5>
+<p>testing javascript framework</p><br />
+
+<div id="div0">
+<script type="text/javascript">
+
+// observer pattern
+
+function Observer() {
+    this.fns = [];
+}
+
+Observer.prototype = {
+    subscribe : function(fn) {
+        this.fns.push(fn);
+    },
+
+    unsubscribe : function(fn) {
+        this.fns = this.fns.filter(
+            function(el) {
+                if ( el !== fn ) {
+                    return el;
+                }
+            }
+        );
+    },
+
+    fire : function(o, thisObj) {
+        var scope = thisObj || window;
+        this.fns.forEach(
+            function(el) {
+                el.call(scope, o);
+            }
+        );
+    }
+};
+
+var fn = function(aaa) { console.log(aaa); };
+var fn2 = function(aaa) { console.log("2 "+aaa+" 2"); };
+var fn3 = function(aaa) { console.log("3 "+aaa+" 3"); };
+
+var o = new Observer;
+o.subscribe(fn);
+o.subscribe(fn2);
+o.subscribe(fn3);
+o.unsubscribe(fn);
+o.fire('here is my data');
+o.unsubscribe(fn2);
+o.unsubscribe(fn3);
+
+</script>
+</div>
+
+<div id="div1">
+<script type="text/javascript">
+
+// filter
+
+function isBigEnough(element, index, array) {
+  return (element >= 10);
+}
+
+var filtered  = [12, 5, 8, 130, 44].filter(isBigEnough);
+document.write("Filtered Value : " + filtered ); 
+
+</script>
+</div>
+
+<div id="div2">
+<script type="text/javascript">
+
+// for through properties
+
+var aProperty;
+document.write("Navigator Object Properties<br /> ");
+for (aProperty in navigator)
+{
+  document.write(aProperty);
+  document.write(", ");
+}
+document.write("Exiting from the loop!");
+
+</script>
+</div>
+
+<div id="div3">
+<script type="text/javascript">
+
+// loop with tags
+
+document.write("<br />Entering the loop! ");
+outerloop:   // This is the label name
+for (var i = 0; i < 5; i++)
+{
+  document.write("<br />Outerloop: " + i + " ");
+  innerloop:
+  for (var j = 0; j < 5; j++)
+  {
+     if (j >  3 ) break ;         // Quit the innermost loop
+     if (i == 2) break innerloop; // Do the same thing
+     if (i == 4) break outerloop; // Quit the outer loop
+     document.write("Innerloop: " + j + " , ");
+   }
+}
+document.write("<br />Exiting the loop!<br /> ");
+
+</script>
+</div>
+
+<div id="div4">
+<script type="text/javascript">
+
+function WriteCookie()
+{
+   if( document.myform.customer.value == "" ){
+      alert("Enter some value!");
+      return;
+   }
+
+   //var now = new Date();
+   //now.setSeconds( now.getSeconds() + 4 ); 
+   
+   cookievalue= escape(document.myform.customer.value) + ";";
+   document.cookie="name=" + cookievalue;
+   //document.cookie = "expires=" + now.getDate() + ";"
+   alert("Setting Cookies : " + "name=" + cookievalue );
+}
+
+function ReadCookie()
+{
+   var allcookies = document.cookie;
+   alert("All Cookies : " + allcookies );
+
+   // Get all the cookies pairs in an array
+   cookiearray  = allcookies.split(';');
+
+   // Now take key value pair out of this array
+   for(var i=0; i<cookiearray.length; i++){
+      name = cookiearray[i].split('=')[0];
+      value = cookiearray[i].split('=')[1];
+      alert("Key is : " + name + " and Value is : " + value);
+   }
+}
+
+</script>
+</div>
+
+<form name="myform" action="">
+Enter name: <input type="text" name="customer"/>
+<input type="button" value="Set Cookie" onclick="WriteCookie();"/>
+<input type="button" value="Get Cookie" onclick="ReadCookie();"/>
+</form>
+
+<div id="div5">
+<script type="text/javascript">
+</script>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<title>Tutor</title>
+
+</head>
+
+<body>
+
+<h3>Tutor</h3> <h5> v 20 </h5>
+<p>testing javascript framework</p><br />
+
+<div id="div0">
+<script type="text/javascript">
+
+var myHashtable = {};
+myHashtable["name"] = "Carl Hollywood";
+myHashtable.city = "Anytown";
+for (var n in myHashtable) {
+    if (myHashtable.hasOwnProperty(n)) {
+        document.writeln("<p> [] " + n + ": " + myHashtable[n] + "</p>");
+    }
+}
+
+function sum() {  // Take any number of parameters and return the sum
+    var total = 0;
+    for (var i = 0; i < arguments.length; ++i) {
+        total += arguments[i];
+    }
+    return total;
+}
+
+console.log(sum(4));
+console.log(sum(4,5));
+console.log(sum(4,5,1,6));
+
+</script>
+</div>
+
+<div id="mydiv">
+</div>
+
+<div id="div1">
+<script type="text/javascript">
+
+	String.prototype.supplant = function(o) {
+
+		return this.replace(/{([^{}]*)}/g, function(a, b) {
+			var r = o[b];
+			return typeof r === 'string' || typeof r === 'number' ? r : a;
+		});
+	};
+
+	var template = '<table border="{border}">'
+			+ '<tr><th>Last</th><td>{last}</td></tr>'
+			+ '<tr><th>First</th><td>{first}</td></tr>' + '</table>';
+
+	console.log(template);
+			
+	var data = {
+		first : "carl",
+		last : "Hollywood",
+		border : 2
+	};
+	
+	console.log(data);
+
+	document.getElementById("mydiv").innerHTML = template.supplant(data);
+</script>
+</div>
+
+<div id="div2">
+<script type="text/javascript">
+
+str="hello folks";
+re="/o/"; //this is a string, so it won't work
+re=eval(re); //change it to an object
+check=str.replace(re,"a");
+console.log(check);
+
+str="hello folks";
+re=/i/;
+check=str.match(re);
+console.log(check);
+
+str="hello folks";
+re=/o/;
+check=str.replace(re,"a");
+console.log(check);
+
+str="hello folks";
+
+re="/o/";
+re=eval(re);
+check=str.search(re);
+console.log(check);
+
+</script>
+</div>
+
+<div id="div3">
+<script type="text/javascript">
+
+// prototype pattern
+
+function myClassA() {
+	this.ppt1 = 10;
+	this.ppt2 = 20;
+}
+
+myClassA.prototype.myMethod1 = function() {
+	return this.ppt1;
+}
+
+myClassA.prototype.myMethod2 = function() {
+	return this.ppt2;
+}
+
+function myClassB(){
+	this.ppt3 = 30;
+}
+
+myClassB.prototype = new myClassA();
+var test = new myClassB();
+console.log(test.ppt3 + test.myMethod2() + test.ppt1);
+
+</script>
+</div>
+
+<div id="div4">
+<script type="text/javascript">
+
+// decorator pattern
+
+myText = {};
+myText.Decorators = {};
+
+myText.Core = function(myString) {
+	this.show = function() {
+		return myString;
+	}
+}
+
+myText.Decorators.addQsMark = function(myString) {
+	this.show = function() {
+		return myString.show() + '?';
+	}
+}
+
+myText.Decorators.makeItalic = function(myString) {
+	this.show = function() {
+		return "<i>" + myString.show() + "</i>";
+	}
+}
+
+var theString = new myText.Core("this is a sampie string");
+console.log(theString.show());
+theString = new myText.Decorators.addQsMark(theString);
+console.log(theString.show());
+theString = new myText.Decorators.makeItalic(theString);
+console.log(theString.show());
+document.write(theString.show());
+
+</script>
+</div>
+
+<div id="div5">
+<script type="text/javascript">
+
+// observer pattern
+
+function printManager() {
+	
+	var queue = [];
+	
+	this.addJob = function(name,job) {
+		queue.push({"name":name, "job":job});
+	}
+	
+	this.removeJob = function(job) {
+		var _queue = [];
+		for (var i in queue) {
+			if (queue[i].job == job)
+				continue;
+			else
+				_queue.push(queue[i]);
+		}
+		queue = _queue;
+	}
+	
+	this.doPrint = function(item) {
+		for (var i in queue) {
+			queue[i].job.call(this, item);
+		}
+	}
+}
+	
+//
+
+var p = new printManager();
+
+function printWithItalics(str) {
+	alert("<i>"+str+"</i>");
+}
+
+function domWithItalics(str) {
+	document.write("<br /><i>"+str+"</i>");
+}
+
+p.addJob("italicsdom",domWithItalics);
+p.addJob("italics",printWithItalics);
+//p.doPrint("this is a testo");
+//p.doPrint("this is a testo2");
+
+</script>
+</div>
+
+<div id="div6">
+<script type="text/javascript">
+
+// closure
+
+function createAdd(base) {
+	return function(num) {
+		return base + num;
+	}
+}
+
+var add5 = createAdd(5);
+console.log(add5(2));
+
+</script>
+</div>
+
+<div id="div7">
+<script type="text/javascript">
+
+// singleton pattern
+
+function MyClass() {
+	if (MyClass.caller != MyClass.getInstance) {
+		throw new Error("MyClass is not a constructor");
+	}
+	
+	var myProperty = "hello world";
+	
+	this.myMethod = function() {
+		console.log(myProperty);
+	};
+
+}
+
+MyClass._instance = null;
+MyClass.getInstance = function() {
+	if (this._instance == null) {
+		this._instance = new MyClass();
+	}
+	return this._instance;
+}
+
+MyClass.getInstance().myMethod();
+
+//var dd = new MyClass(); //error
+
+</script>
+</div>
+
+<div id="div8">
+<script type="text/javascript">
+
+// better singleton pattern
+
+var Resource = (function(){
+	// Resouce class which is to made 'singleton'
+	function _Resource() {
+    	var name; // private variable
+    	this.getName = function() {	// getter
+    		return this.name;
+    	};
+		this.setName= function(name){ // setter
+			this.name = name;
+		};
+		// do more stuffs
+    }
+    // instance holder
+    var instance = new _Resource();
+    // return an object with 'getInstance' method
+    return {
+        getInstance: function(){
+            return instance;
+        }
+   };
+})();
+
+//get resource r1
+r1 = Resource.getInstance();
+// get resource r2  (since Resource is singleton, r1 == r2)
+r2 = Resource.getInstance();
+// to verify, let's set 'name' onto r1
+r1.setName("Hola Kumar");
+console.log(r1.getName());
+// and the same 'name' appears in r2 as well!
+console.log(r2.getName());
+
+</script>
+</div>
+
+</body>
+
+</html>
