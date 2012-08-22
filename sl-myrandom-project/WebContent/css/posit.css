@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+#example {
+	padding: 1px; border: 1px;
+}
+
+#div-before {
+	background: purple;
+}
+
+#div-1 {
+	// 2 position:relative;
+ 	// 2 top:20px;
+ 	// 2 left:-40px;
+	// 1 position: static;
+	background: black; color: white;
+}
+
+#div-1a {
+	// position:absolute;
+ 	// top:0;
+ 	// right:0;
+ 	// width:200px;
+	background: red;
+}
+
+#div-1b {
+	background: green;
+}
+
+#div-1c {
+	background: blue;
+}
+
+#div-after {
+	background: purple;
+}
+
+#div-1a {
+ float:left;
+ width:190px;
+}
+#div-1b {
+ float:left;
+ width:190px;
+}
+#div-1c {
+ clear:both;
+}
