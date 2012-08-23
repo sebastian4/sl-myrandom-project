@@ -11,7 +11,7 @@
 
 <body>
 
-<h3>Tutor</h3> <h5> v 16 </h5>
+<h3>Tutor</h3> <h5> v 21 </h5>
 <p>testing javascript framework</p><br />
 
 <p>crockfords</p>
@@ -19,9 +19,7 @@
 <div id="div0">
 <script type="text/javascript">
 
-// closure
-
-var digit_name = (function() {
+var closure_digit_name = (function() {
 	var names = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];
 	
 	return function(n) {
@@ -29,9 +27,24 @@ var digit_name = (function() {
 	};
 } () );
 
-console.log(digit_name(3));
-console.log(digit_name(2));
-console.log(digit_name(0));
+var lazy_init_digit_name = (function() {
+	var names;
+	
+	return function(n) {
+		if (!names) {
+			names = ['cero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+		}
+		return names[n];
+	}
+	
+} () )
+
+console.log(closure_digit_name(3));
+console.log(closure_digit_name(2));
+console.log(closure_digit_name(0));
+
+console.log(lazy_init_digit_name(5));
+console.log(lazy_init_digit_name(0));
 
 </script>
 </div>
@@ -63,10 +76,29 @@ fade('div-1b');
 </script>
 </div>
 
-
-
 <div id="div2">
 <script type="text/javascript">
+
+if (typeof Object.prototype.later !== 'function') {
+	Object.prototype.later = function (msec, method) {
+		var that = this,
+		args = Array.prototype.slice.apply(arguments, [2]);
+		if (typeof method === 'string') {
+			method = that[method];
+		}
+		setTimeout(function() {
+			method.apply(that,args);
+		}, msec);
+		return that; //cascade
+	}
+}
+
+function poping(argies) {
+	alert(argies)
+}
+
+later(6000, poping('assa'));
+
 </script>
 </div>
 
