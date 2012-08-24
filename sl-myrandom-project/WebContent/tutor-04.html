@@ -11,7 +11,7 @@
 
 <body>
 
-<h3>Tutor</h3> <h5> v 21 </h5>
+<h3>Tutor</h3> <h5> v 22 </h5>
 <p>testing javascript framework</p><br />
 
 <p>crockfords</p>
@@ -79,9 +79,11 @@ fade('div-1b');
 <div id="div2">
 <script type="text/javascript">
 
+// later
+
 if (typeof Object.prototype.later !== 'function') {
 	Object.prototype.later = function (msec, method) {
-		var that = this,
+		var that = this;
 		args = Array.prototype.slice.apply(arguments, [2]);
 		if (typeof method === 'string') {
 			method = that[method];
@@ -97,13 +99,29 @@ function poping(argies) {
 	alert(argies)
 }
 
-later(6000, poping('assa'));
+// later(6000, poping('assa'));
 
 </script>
 </div>
 
 <div id="div3">
 <script type="text/javascript">
+
+// partial application
+
+function curry(func) {
+	var args = arguments.slice(1);
+	return function() {
+		return func.apply(null, args.concat(arguments.slice()));
+	};
+}
+
+var inc = curry(function add(a,b) {
+	return a + b;
+}, 1);
+
+alert(inc(6));
+
 </script>
 </div>
 
